@@ -1,3 +1,6 @@
+import os
+
+os.makedirs("data/louisiana/zip/entergy", exist_ok=True)
 import entergy_scrapper
 #import mp_scrapper
 #import riviera_scrapper
