@@ -1,6 +1,9 @@
 import os
 
 os.makedirs("data/louisiana/zip/entergy", exist_ok=True)
+os.makedirs("data/louisiana/county/entergy", exist_ok=True)
+os.makedris("data/mississippi/county/entery", exist_ok=True)
+os.makedris("data/mississippi/zip/entergy", exist_ok=True)
 import entergy_scrapper
 #import mp_scrapper
 #import riviera_scrapper
