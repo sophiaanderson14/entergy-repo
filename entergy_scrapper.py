@@ -23,14 +23,7 @@ def current_entergy(location,area):
         entergy = pd.DataFrame(data['results'])
     else:
         entergy = pd.DataFrame(data)
-
-    if 'county' in entergy.columns:
-        entergy["county"] = entergy["county"].replace(replace_dict)
-    else:
-        print("Warning: 'county' column not found in DataFrame.")
-        entergy["county"] = ""  # or handle as needed
-
-    # Ensure output directory exists
+        # Ensure output directory exists
     csv_file = "data/louisiana/zip/entergy/all_data.csv"
     os.makedirs(os.path.dirname(csv_file), exist_ok=True)
     # Define replace_dict before it's used
@@ -44,6 +37,11 @@ def current_entergy(location,area):
         "LA SALLE": "LASALLE",
         # Add any other replacements here
     }
+    if 'county' in entergy.columns:
+        entergy["county"] = entergy["county"].replace(replace_dict)
+    else:
+        print("Warning: 'county' column not found in DataFrame.")
+        entergy["county"] = ""  # or handle as needed
 
     if 'county' in entergy.columns:
         entergy["county"] = entergy["county"].replace(replace_dict)
