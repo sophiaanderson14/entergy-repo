@@ -10,7 +10,9 @@ def current_entergy(location,area):
     url = "https://entergy.datacapable.com/datacapable/v1/entergy/Entergy{}/{}".format(location,area)
     print(url)
     #get current time
-    now = datetime.now().strftime("%Y-%m-%d %I:%M").lstrip("0").replace(" 0", " ")
+    now = datetime.now()
+    date_str = now.strftime("%Y-%m-%d")
+    time_str = now.strftime("%I:%M").lstrip("0").replace(" 0", " ")
     #go to webpage
     r = requests.get(url)
     #convert into json
@@ -20,7 +22,8 @@ def current_entergy(location,area):
     #label utility as entergy
     entergy["utility"] = "Entergy"
     #add current time to a column
-    entergy["time pulled"] = now
+    entergy["date pulled"] = date_str
+    entergy["time pulled"] = time_str
     #use a single file for all results
     csv_file = f"data/{location.lower()}/{area}/entergy/all_data.csv"
     write_header = not os.path.isfile(csv_file)
