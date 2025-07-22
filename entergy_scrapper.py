@@ -4,6 +4,7 @@ from datetime import datetime
 import math
 from time import sleep
 
+import os
 def current_entergy(location,area):
     #opening base URL
     url = "https://entergy.datacapable.com/datacapable/v1/entergy/Entergy{}/{}".format(location,area)
@@ -20,8 +21,11 @@ def current_entergy(location,area):
     entergy["utility"] = "Entergy"
     #add current time to a column
     entergy["time pulled"] = now
-    title = "{}-{}-{} {}.{}".format(now.year,now.month,now.day,now.hour,now.minute)
-    path = "data/{}/{}/{}/{}.csv".format(location.lower(),area,"entergy",title)
+    #use a single file for all results
+    csv_file = f"data/{location.lower()}/{area}/entergy/all_data.csv"
+    write_header = not os.path.isfile(csv_file)
+    entergy.to_csv(csv_file, mode='a', header=write_header, index=False)
+    return entergy
     print(path)
     entergy.to_csv(path)
     return entergy
