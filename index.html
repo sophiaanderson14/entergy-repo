@@ -29,8 +29,8 @@
         <div id="csv-table"></div>
     </div>
     <script>
-        // Example: Fetch and display CSV data in a table
-        fetch('your-data.csv')
+    document.addEventListener('DOMContentLoaded', function() {
+        fetch('data/louisiana/county/entergy/all_data.csv')
             .then(response => response.text())
             .then(data => {
                 const rows = data.trim().split('\n').map(row => row.split(','));
@@ -47,7 +47,9 @@
                     table.appendChild(tr);
                 });
                 document.getElementById('csv-table').appendChild(table);
-            });
+            })
+            .catch(error => console.error(error));
+    });
     </script>
 </body>
 </html>
