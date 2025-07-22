@@ -17,14 +17,21 @@ def current_entergy(location,area):
     r = requests.get(url)
     #convert into json
     data = r.json()
-    #convert into pandas dataframe
-    entergy = pd.DataFrame(data)
-    if 'county' in df.columns:
-        # proceed as normal
-        county_data = df['county']
+    print(data)  # Debug: inspect API response
+
+    if isinstance(data, dict) and 'results' in data:
+        entergy = pd.DataFrame(data['results'])
+    else:
+        entergy = pd.DataFrame(data)
+
+    if 'county' in entergy.columns:
+        entergy["county"] = entergy["county"].replace(replace_dict)
     else:
         print("Warning: 'county' column not found in DataFrame.")
-        # handle accordingly, e.g., skip this step or use a default/fallback
+        entergy["county"] = ""  # or handle as needed
+
+    # Ensure output directory exists
+    os.makedirs(os.path.dirname(csv_file), exist_ok=True)
     replace_dict = {
         "E. BATON ROUGE": "EAST BATON ROUGE",
         "W. BATON ROUGE": "WEST BATON ROUGE",
