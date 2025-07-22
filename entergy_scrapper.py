@@ -33,6 +33,7 @@ def current_entergy(location,area):
     # Ensure output directory exists
     csv_file = "data/louisiana/zip/entergy/all_data.csv"
     os.makedirs(os.path.dirname(csv_file), exist_ok=True)
+    # Define replace_dict before it's used
     replace_dict = {
         "E. BATON ROUGE": "EAST BATON ROUGE",
         "W. BATON ROUGE": "WEST BATON ROUGE",
@@ -43,7 +44,12 @@ def current_entergy(location,area):
         "LA SALLE": "LASALLE",
         # Add any other replacements here
     }
-    entergy["county"] = entergy["county"].replace(replace_dict)
+
+    if 'county' in entergy.columns:
+        entergy["county"] = entergy["county"].replace(replace_dict)
+    else:
+        print("Warning: 'county' column not found in DataFrame.")
+        entergy["county"] = ""  # or handle as needed
     #label utility as entergy
     entergy["utility"] = "Entergy"
     #add current time to a column
