@@ -38,6 +38,41 @@
         <p>The map below auto-updates every five minutes. The comes from Entergy, and therefore only reflects households that use Entergy for energy. Entergy is the largest energy provider in the state. </p>
         <div class="graphic">
             <iframe title="Entergy customers without power " aria-label="Map" id="datawrapper-chart-DXr6I" src="https://datawrapper.dwcdn.net/TKL6B/3/" scrolling="no" frameborder="0" style="width: 0; min-width: 100% !important; border: none;" height="731" data-external="1"></iframe><script type="text/javascript">!function(){"use strict";window.addEventListener("message",(function(a){if(void 0!==a.data["datawrapper-height"]){var e=document.querySelectorAll("iframe");for(var t in a.data["datawrapper-height"])for(var r,i=0;r=e[i];i++)if(r.contentWindow===a.source){var d=a.data["datawrapper-height"][t]+"px";r.style.height=d}}}))}();
+        <!DOCTYPE html>
+<html>
+<head>
+  <title>CSV Table Embed</title>
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.3.2/papaparse.min.js"></script>
+</head>
+<body>
+  <div id="csv-table"></div>
+  <script>
+    Papa.parse('https://raw.githubusercontent.com/sophiaanderson14/entergy-repo/main/data/louisiana/county/entergy/all_data.csv', {
+      download: true,
+      header: true,
+      complete: function(results) {
+        let data = results.data;
+        let html = '<table border="1"><tr>';
+        // Header
+        Object.keys(data[0]).forEach(key => {
+          html += `<th>${key}</th>`;
+        });
+        html += '</tr>';
+        // Data
+        data.forEach(row => {
+          html += '<tr>';
+          Object.values(row).forEach(val => {
+            html += `<td>${val || ''}</td>`;
+          });
+          html += '</tr>';
+        });
+        html += '</table>';
+        document.getElementById('csv-table').innerHTML = html;
+      }
+    });
+  </script>
+</body>
+</html>
         </div>
     </main>
     <footer id="footer">
