@@ -31,6 +31,7 @@ def current_entergy(location,area):
         entergy["county"] = ""  # or handle as needed
 
     # Ensure output directory exists
+    csv_file = "data/louisiana/zip/entergy/all_data.csv"
     os.makedirs(os.path.dirname(csv_file), exist_ok=True)
     replace_dict = {
         "E. BATON ROUGE": "EAST BATON ROUGE",
