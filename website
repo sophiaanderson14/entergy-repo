@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">    
+<head>      
+    <title>Entergy Tracker</title>    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=700, initial-scale=1">
+    <style>
+        body {
+            margin: 0;
+            background-color: white; 
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+        .container {
+            width: 700px;
+            margin: 4em auto;
+        }
+        h1 {
+            text-align: center;
+            font-size: 3em;
+            margin: 2em 0;
+        }
+        .graphic {
+            max-width: 500px;
+            margin: 2em auto;
+        }
+        #footer {
+            text-align: center;
+            padding: 4em;
+            background-color: #f0f1ff;
+            border-top: solid white 5px;
+        }
+    </style>
+</head>
+<body>
+    <main class="container">
+        <h1>Outage Tracker</h1>
+        <h3>Zip codes in Louisiana, colored by customers impacted by outages. </h3>
+        <p>The map below auto-updates every five minutes. The data is scraped from Entergy's website.</p>
+        <div class="graphic">
+            <iframe title="Entergy customers without power " aria-label="Map" id="datawrapper-chart-DXr6I" src="https://datawrapper.dwcdn.net/DXr6I/1/" scrolling="no" frameborder="0" style="width: 0; min-width: 100% !important; border: none;" height="731" data-external="1"></iframe><script type="text/javascript">!function(){"use strict";window.addEventListener("message",(function(a){if(void 0!==a.data["datawrapper-height"]){var e=document.querySelectorAll("iframe");for(var t in a.data["datawrapper-height"])for(var r,i=0;r=e[i];i++)if(r.contentWindow===a.source){var d=a.data["datawrapper-height"][t]+"px";r.style.height=d}}}))}();
+        </div>
+    </main>
+    <footer id="footer">
+        <p>This website was made for a tutorial on <a href="https://jonathansoma.com">auto-updating websites</a>.</p>
+    </footer>
+</body>
+</html>
