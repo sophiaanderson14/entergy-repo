@@ -1,76 +1,53 @@
 <!DOCTYPE html>
-<html lang="en">    
-<head>      
-    <title>Entergy Tracker</title>    
+<html lang="en">
+<head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=700, initial-scale=1">
+    <title>Entergy Data Visualization</title>
     <style>
-        body {
-            margin: 0;
-            background-color: white; 
-            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-        }
-        .container {
-            width: 700px;
-            margin: 4em auto;
-        }
-        h1 {
-            text-align: center;
-            font-size: 3em;
-            margin: 2em 0;
-        }
         .graphic {
-            max-width: 500px;
-            margin: 2em auto;
+            margin: 20px;
         }
-        #footer {
-            text-align: center;
-            padding: 4em;
-            background-color: #f0f1ff;
-            border-top: solid white 5px;
+        #csv-table {
+            margin-top: 20px;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        #csv-table th, #csv-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        #csv-table th {
+            background-color: #f2f2f2;
         }
     </style>
 </head>
 <body>
-    <main class="container">
-        <h1>Outage Tracker</h1>
-        <h3>Parishes in Louisiana, colored according to impact of power outages. </h3>
-        <p>The map below auto-updates every five minutes. The data comes from Entergy, and therefore only reflects households that use Entergy for energy. Entergy is the largest energy provider in the state. </p>
-        <div class="graphic">
-            <iframe title="Entergy customers without power " aria-label="Map" id="datawrapper-chart-DXr6I" src="https://datawrapper.dwcdn.net/TKL6B/3/" scrolling="no" frameborder="0" style="width: 0; min-width: 100% !important; border: none;" height="731" data-external="1"></iframe><script type="text/javascript">!function(){"use strict";window.addEventListener("message",(function(a){if(void 0!==a.data["datawrapper-height"]){var e=document.querySelectorAll("iframe");for(var t in a.data["datawrapper-height"])for(var r,i=0;r=e[i];i++)if(r.contentWindow===a.source){var d=a.data["datawrapper-height"][t]+"px";r.style.height=d}}}))}();
-  
-  <div id="csv-table"></div>
-  <script>
-    Papa.parse('https://raw.githubusercontent.com/sophiaanderson14/entergy-repo/main/data/louisiana/county/entergy/all_data.csv', {
-      download: true,
-      header: true,
-      complete: function(results) {
-        let data = results.data;
-        let html = '<table border="1"><tr>';
-        // Header
-        Object.keys(data[0]).forEach(key => {
-          html += `<th>${key}</th>`;
-        });
-        html += '</tr>';
-        // Data
-        data.forEach(row => {
-          html += '<tr>';
-          Object.values(row).forEach(val => {
-            html += `<td>${val || ''}</td>`;
-          });
-          html += '</tr>';
-        });
-        html += '</table>';
-        document.getElementById('csv-table').innerHTML = html;
-      }
-    });
-  </script>
-</body>
-</html>
-        </div>
-    </main>
-    <footer id="footer">
-        <p>This website was made for a tutorial on <a href="https://jonathansoma.com">auto-updating websites</a>.</p>
-    </footer>
+    <h1>Entergy Data Visualization</h1>
+    <p>The data comes from Entergy and is visualized below.</p>
+    <div class="graphic">
+        <iframe src="your-visualization-url-here" width="600" height="400"></iframe>
+        <div id="csv-table"></div>
+    </div>
+    <script>
+        // Example: Fetch and display CSV data in a table
+        fetch('your-data.csv')
+            .then(response => response.text())
+            .then(data => {
+                const rows = data.trim().split('\n').map(row => row.split(','));
+                const table = document.createElement('table');
+                table.id = 'csv-table';
+                rows.forEach((row, i) => {
+                    const tr = document.createElement('tr');
+                    row.forEach(cell => {
+                        const tag = i === 0 ? 'th' : 'td';
+                        const td = document.createElement(tag);
+                        td.textContent = cell;
+                        tr.appendChild(td);
+                    });
+                    table.appendChild(tr);
+                });
+                document.getElementById('csv-table').appendChild(table);
+            });
+    </script>
 </body>
 </html>
