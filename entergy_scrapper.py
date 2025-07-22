@@ -56,7 +56,7 @@ def current_entergy(location,area):
 
     # CALCULATE PERCENT WITHOUT POWER BEFORE SAVING
     if "customersAffected" in entergy.columns and "customersServed" in entergy.columns:
-        entergy["percentWithoutPower"] = entergy["customersAffected"] / entergy["customersServed"]
+        entergy["percentWithoutPower"] = (entergy["customersAffected"] / entergy["customersServed"]).round(2)
     else:
         entergy["percentWithoutPower"] = None
 
