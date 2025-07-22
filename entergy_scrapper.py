@@ -10,7 +10,7 @@ def current_entergy(location,area):
     url = "https://entergy.datacapable.com/datacapable/v1/entergy/Entergy{}/{}".format(location,area)
     print(url)
     #get current time
-    now = datetime.now()
+    now = datetime.now().strftime("%Y-%m-%d %I:%M").lstrip("0").replace(" 0", " ")
     #go to webpage
     r = requests.get(url)
     #convert into json
