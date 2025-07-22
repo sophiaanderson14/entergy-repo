@@ -59,6 +59,6 @@ def current_entergy(location,area):
     entergy.to_csv(csv_file, mode='a', header=write_header, index=False)
     return entergy
     print(path)
-    entergy["percentAffected"] = entergy["customersAffected"] / entergy["customersServed"]
+    entergy["percentWithoutPower"] = entergy["customersAffected"] / entergy["customersServed"]
     entergy.to_csv(path)
     return entergy
