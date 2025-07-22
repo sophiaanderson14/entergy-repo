@@ -20,16 +20,16 @@ def current_entergy(location,area):
     #convert into pandas dataframe
     entergy = pd.DataFrame(data)
     replace_dict = {
-    "E. BATON ROUGE": "EAST BATON ROUGE",
-    "W. BATON ROUGE": "WEST BATON ROUGE",
-    "E. CARROLL": "EAST CARROLL",
-    "W. CARROLL": "WEST CARROLL",
-    "E. FELICIANA": "EAST FELICIANA",
-    "W. FELICIANA": "WEST FELICIANA",
-    "LA SALLE": "LASALLE",
-    # Add any other replacements here
-}
-entergy["county"] = entergy["county"].replace(replace_dict)
+        "E. BATON ROUGE": "EAST BATON ROUGE",
+        "W. BATON ROUGE": "WEST BATON ROUGE",
+        "E. CARROLL": "EAST CARROLL",
+        "W. CARROLL": "WEST CARROLL",
+        "E. FELICIANA": "EAST FELICIANA",
+        "W. FELICIANA": "WEST FELICIANA",
+        "LA SALLE": "LASALLE",
+        # Add any other replacements here
+    }
+    entergy["county"] = entergy["county"].replace(replace_dict)
     #label utility as entergy
     entergy["utility"] = "Entergy"
     #add current time to a column
