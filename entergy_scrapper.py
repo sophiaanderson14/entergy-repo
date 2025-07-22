@@ -29,6 +29,10 @@ def current_entergy(location,area):
         "LA SALLE": "LASALLE",
         # Add any other replacements here
     }
+    if 'county' in df.columns:
+    # Proceed with your logic
+else:
+    print("Missing 'county' column in input data")
     entergy["county"] = entergy["county"].replace(replace_dict)
     #label utility as entergy
     entergy["utility"] = "Entergy"
