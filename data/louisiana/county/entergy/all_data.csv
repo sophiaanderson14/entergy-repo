@@ -1,4 +1,4 @@
-state,county,customersServed,customersAffected,percentageWithPower,lastUpdatedTime,latitude,longitude,utility,percentWithoutPower,date,time
+state,county,customersServed,customersAffected,percentageWithPower,lastUpdatedTime,latitude,longitude,utility,date,time,percentWithoutPower
 L,ACADIA,6698,2,100.0,1753205427273,30.216405750798724,-92.52246006389775,Entergy,2025-07-22,5:30,0.0
 L,ALLEN,155,0,100.0,1753205427273,30.605661764705882,-92.68816176470588,Entergy,2025-07-22,5:30,0.0
 L,ASCENSION,46593,3,100.0,1753205427273,30.258093385214007,-90.84015564202333,Entergy,2025-07-22,5:30,0.0
