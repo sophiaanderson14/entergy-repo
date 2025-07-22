@@ -19,6 +19,10 @@ def current_entergy(location,area):
     data = r.json()
     #convert into pandas dataframe
     entergy = pd.DataFrame(data)
+    if 'county' not in entergy.columns:
+    print("Missing 'county' column in input data")
+    # You may want to handle this (e.g., return or raise an error), depending on your needs.
+    return None
     replace_dict = {
         "E. BATON ROUGE": "EAST BATON ROUGE",
         "W. BATON ROUGE": "WEST BATON ROUGE",
@@ -29,10 +33,6 @@ def current_entergy(location,area):
         "LA SALLE": "LASALLE",
         # Add any other replacements here
     }
-    if 'county' in df.columns:
-    # Proceed with your logic
-else:
-    print("Missing 'county' column in input data")
     entergy["county"] = entergy["county"].replace(replace_dict)
     #label utility as entergy
     entergy["utility"] = "Entergy"
