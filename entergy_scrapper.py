@@ -48,17 +48,20 @@ def current_entergy(location,area):
     else:
         print("Warning: 'county' column not found in DataFrame.")
         entergy["county"] = ""  # or handle as needed
-    #label utility as entergy
+        #label utility as entergy
     entergy["utility"] = "Entergy"
     #add current time to a column
     entergy["date pulled"] = date_str
     entergy["time pulled"] = time_str
+
+    # CALCULATE PERCENT WITHOUT POWER BEFORE SAVING
+    if "customersAffected" in entergy.columns and "customersServed" in entergy.columns:
+        entergy["percentWithoutPower"] = entergy["customersAffected"] / entergy["customersServed"]
+    else:
+        entergy["percentWithoutPower"] = None
+
     #use a single file for all results
     csv_file = f"data/{location.lower()}/{area}/entergy/all_data.csv"
     write_header = not os.path.isfile(csv_file)
     entergy.to_csv(csv_file, mode='a', header=write_header, index=False)
-    return entergy
-    print(path)
-    entergy["percentWithoutPower"] = entergy["customersAffected"] / entergy["customersServed"]
-    entergy.to_csv(path)
     return entergy
