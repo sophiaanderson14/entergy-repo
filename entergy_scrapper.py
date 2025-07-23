@@ -1,3 +1,8 @@
+try:
+    import gspread
+except ModuleNotFoundError:
+    print("gspread module not found. Please install it with 'pip install gspread'.")
+    exit(1)
 import requests
 import pandas as pd
 from datetime import datetime
