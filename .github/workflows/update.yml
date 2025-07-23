@@ -18,7 +18,6 @@ jobs:
         run: |
           pip install -r requirements.txt
           - name: Install dependencies
-          working-directory: ${{ github.workspace }}
       - name: Check out this repo
         uses: actions/checkout@v2
       - name: Set up Python
