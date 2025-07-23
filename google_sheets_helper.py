@@ -60,7 +60,7 @@ class GoogleSheetsHelper:
         
         Args:
             sheet_url (str): The Google Sheet URL or key
-            worksheet_name (str): Name of the worksheet (default: "Sheet1")
+            worksheet_name (str): Name of the worksheet (default: "Entergy")
             
         Returns:
             bool: True if sheet opened successfully, False otherwise
