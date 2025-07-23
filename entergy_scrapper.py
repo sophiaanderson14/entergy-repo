@@ -5,6 +5,13 @@ from google.oauth2.service_account import Credentials
 import os
 
 # Authenticate and connect
+import json
+
+with open('data.json') as f:
+    content = f.read()
+    if not content.strip():
+        raise ValueError("JSON input is empty.")
+    data = json.loads(content)
 SERVICE_ACCOUNT_FILE = 'credentials.json'
 SHEET_NAME = 'Entergy'
 creds = Credentials.from_service_account_file(
