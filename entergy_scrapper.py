@@ -1,7 +1,6 @@
 import entergy_scrapper
 import gspread
 import pandas as pd
-from google.oauth2.service_account import Credentials
 import os
 
 # Authenticate and connect
@@ -17,9 +16,10 @@ if os.path.exists(filename):
 else:
     raise FileNotFoundError(f"{filename} does not exist.")
 SHEET_NAME = 'Entergy'
-creds = Credentials.from_service_account_file(
-    CREDENTIALS = "credentials.json"
-)
+from google.oauth2.service_account import Credentials
+
+CREDENTIALS = "credentials.json"  # This matches your workflow step
+creds = Credentials.from_service_account_file(CREDENTIALS)
 gc = gspread.authorize(creds)
 sheet = gc.open(SHEET_NAME).sheet1
 
