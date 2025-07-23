@@ -112,7 +112,7 @@ def _append_to_google_sheets(df: pd.DataFrame) -> bool:
             df=df,
             sheet_url=sheet_url,
             credentials_file="credentials.json",
-            worksheet_name="Sheet1"
+            worksheet_name="Entergy"
         )
         
     except Exception as e:
