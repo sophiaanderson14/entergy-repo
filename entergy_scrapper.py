@@ -4,6 +4,9 @@ from datetime import datetime
 import math
 from time import sleep
 import os
+import entergy_scrapper
+import gspread
+from google.oauth2.service_account import Credentials
 
 # Import Google Sheets helper for Louisiana county data
 try:
