@@ -54,7 +54,7 @@ class GoogleSheetsHelper:
             logger.error(f"Unexpected error during authentication: {e}")
             return False
     
-    def open_sheet(self, sheet_url: str, worksheet_name: str = "Sheet1") -> bool:
+    def open_sheet(self, sheet_url: str, worksheet_name: str = "Entergy") -> bool:
         """
         Open a Google Sheet by URL.
         
@@ -149,7 +149,7 @@ class GoogleSheetsHelper:
 def append_to_google_sheet(df: pd.DataFrame, 
                           sheet_url: str, 
                           credentials_file: str = "credentials.json",
-                          worksheet_name: str = "Sheet1") -> bool:
+                          worksheet_name: str = "Entergy") -> bool:
     """
     Convenience function to append data to a Google Sheet.
     
