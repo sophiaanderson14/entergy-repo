@@ -16,7 +16,7 @@ jobs:
         run: ls -al
       - name: Install dependencies
         run: |
-          pip install -r requirements.txt
+          pip install -r $GITHUB_WORKSPACE/requirements.txt
       - name: Check out this repo
         uses: actions/checkout@v2
       - name: Set up Python
