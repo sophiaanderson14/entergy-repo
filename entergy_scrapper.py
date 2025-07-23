@@ -18,8 +18,7 @@ else:
     raise FileNotFoundError(f"{filename} does not exist.")
 SHEET_NAME = 'Entergy'
 creds = Credentials.from_service_account_file(
-    SERVICE_ACCOUNT_FILE,
-    scopes=['https://www.googleapis.com/auth/spreadsheets', 'https://www.googleapis.com/auth/drive']
+    SERVICE_ACCOUNT_FILE = "credentials.json"
 )
 gc = gspread.authorize(creds)
 sheet = gc.open(SHEET_NAME).sheet1
