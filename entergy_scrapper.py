@@ -11,6 +11,8 @@ creds = Credentials.from_service_account_file(
     SERVICE_ACCOUNT_FILE,
     scopes=['https://www.googleapis.com/auth/spreadsheets', 'https://www.googleapis.com/auth/drive']
 )
+- name: Create credentials.json from secret
+  run: echo "${{ secrets.credentials }}" > credentials.json
 gc = gspread.authorize(creds)
 sheet = gc.open(SHEET_NAME).sheet1
 
