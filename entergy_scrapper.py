@@ -18,7 +18,7 @@ else:
     raise FileNotFoundError(f"{filename} does not exist.")
 SHEET_NAME = 'Entergy'
 creds = Credentials.from_service_account_file(
-    SERVICE_ACCOUNT_FILE = "credentials.json"
+    CREDENTIALS = "credentials.json"
 )
 gc = gspread.authorize(creds)
 sheet = gc.open(SHEET_NAME).sheet1
