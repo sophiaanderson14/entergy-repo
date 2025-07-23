@@ -174,4 +174,4 @@ def append_to_google_sheet(df: pd.DataFrame,
 
 
 # Configuration - This should be set by the user
-DEFAULT_SHEET_URL = ""  # User should set this in their environment or config
+DEFAULT_SHEET_URL = "https://docs.google.com/spreadsheets/d/1cFvhZwrmemdFcA9iWisSxJKj6tGbQcNkcKNqUDC2Yow/edit?pli=1&gid=0#gid=0"  # User should set this in their environment or config
