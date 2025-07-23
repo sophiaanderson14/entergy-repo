@@ -7,12 +7,15 @@ import os
 # Authenticate and connect
 import json
 
-with open('data.json') as f:
-    content = f.read()
-    if not content.strip():
-        raise ValueError("JSON input is empty.")
-    data = json.loads(content)
-SERVICE_ACCOUNT_FILE = 'credentials.json'
+filename = 'data.json'
+if os.path.exists(filename):
+    with open(filename) as f:
+        content = f.read()
+        if not content.strip():
+            raise ValueError("JSON input is empty.")
+        data = json.loads(content)
+else:
+    raise FileNotFoundError(f"{filename} does not exist.")
 SHEET_NAME = 'Entergy'
 creds = Credentials.from_service_account_file(
     SERVICE_ACCOUNT_FILE,
