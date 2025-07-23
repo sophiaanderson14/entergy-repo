@@ -1,0 +1,4 @@
+requests==2.31.0
+pandas>=2.0.0
+gspread>=5.12.0
+google-auth>=2.17.0
