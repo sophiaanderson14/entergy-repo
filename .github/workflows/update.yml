@@ -12,6 +12,9 @@ jobs:
   daily:
     runs-on: ubuntu-latest
     steps:
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
       - name: Check out this repo
         uses: actions/checkout@v2
       - name: Set up Python
