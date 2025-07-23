@@ -147,21 +147,28 @@ class GoogleSheetsHelper:
 
 
 def append_to_google_sheet(df: pd.DataFrame, 
-                          sheet_url: str, 
+                          sheet_url: str = None, 
                           credentials_file: str = "credentials.json",
                           worksheet_name: str = "Entergy") -> bool:
     """
     Convenience function to append data to a Google Sheet.
+    If sheet_url is not provided, tries to use the GOOGLE_SHEET_URL environment variable.
     
     Args:
         df (pd.DataFrame): The DataFrame to append
-        sheet_url (str): The Google Sheet URL or key
+        sheet_url (str): The Google Sheet URL or key (optional)
         credentials_file (str): Path to the credentials file
         worksheet_name (str): Name of the worksheet
         
     Returns:
         bool: True if successful, False otherwise
     """
+    if not sheet_url:
+        sheet_url = os.getenv("GOOGLE_SHEET_URL")
+        if not sheet_url:
+            logger.error("Google Sheet URL not provided and GOOGLE_SHEET_URL environment variable not set.")
+            return False
+
     helper = GoogleSheetsHelper(credentials_file)
     
     if not helper.authenticate():
