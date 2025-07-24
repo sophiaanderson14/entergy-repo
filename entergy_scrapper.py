@@ -20,13 +20,34 @@ from google.oauth2.service_account import Credentials
 
 import sys  # add this at the top if not already present
 
-CREDENTIALS = "credentials.json"
-if os.path.isfile(CREDENTIALS):
-    creds = Credentials.from_service_account_file(CREDENTIALS)
-else:
-    print(f"Credentials file '{CREDENTIALS}' not found.")
-    sys.exit(1)  # or handle as appropriate
-gc = gspread.authorize(creds)
+# --- START: MODIFIED SECTION FOR GITHUB ACTIONS ---
+# This block replaces the original file-based authentication.
+# It reads the credentials from an environment variable.
+
+# 1. Get the JSON string from the environment variable
+creds_json_string = os.environ.get('GOOGLE_CREDS_JSON')
+
+# 2. Check if the environment variable is set
+if not creds_json_string:
+    print("Error: The GOOGLE_CREDS_JSON environment variable is not set.")
+    sys.exit(1)
+
+try:
+    # 3. Load the JSON string into a Python dictionary
+    creds_dict = json.loads(creds_json_string)
+    
+    # 4. Authorize gspread using the credentials dictionary
+    gc = gspread.service_account_from_dict(creds_dict)
+
+except json.JSONDecodeError:
+    print("Error: Could not decode the GOOGLE_CREDS_JSON. Ensure it's a valid, single-line JSON in your GitHub Secret.")
+    sys.exit(1)
+except Exception as e:
+    print(f"An error occurred during gspread authorization: {e}")
+    sys.exit(1)
+# --- END: MODIFIED SECTION FOR GITHUB ACTIONS ---
+
+
 sheet = gc.open(SHEET_NAME).sheet1
 
 # Fetch data
