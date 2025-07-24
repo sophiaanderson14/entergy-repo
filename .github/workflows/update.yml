@@ -27,6 +27,9 @@ jobs:
           fi   
       - name: Create credentials.json from secret and convert \n to newlines
         run: echo "${{ secrets.CREDENTIALS }}" | python -c "import sys; print(sys.stdin.read().replace('\\\\n', '\n'))" > credentials.json
+      - name: Debug credentials.json
+        run: |
+          cat credentials.json
       - name: Check credentials.json existence and permissions
         run: |
           if [ -f credentials.json ]; then
