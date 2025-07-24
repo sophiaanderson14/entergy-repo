@@ -25,25 +25,24 @@ jobs:
           if [ ! -f data.json ]; then 
             echo '{}' > data.json 
           fi   
-      - name: Create credentials.json from secret and convert \n to newlines
-        run: echo "${{ secrets.CREDENTIALS }}" | python -c "import sys; print(sys.stdin.read().replace('\\\\n', '\n'))" > credentials.json
-      - name: Debug credentials.json
-        run: |
-          cat credentials.json
-      - name: Check credentials.json existence and permissions
-        run: |
-          if [ -f credentials.json ]; then
-            echo "credentials.json exists"
-            ls -l credentials.json
-            head -n 5 credentials.json  # Only prints first 5 lines for safety
-          else
-            echo "credentials.json does not exist"
-            exit 1
-          fi
+      
+      # --- DELETED STEPS ---
+      # The following steps that create and check credentials.json are no longer needed
+      # and have been removed. They were the source of the error.
+      # - name: Create credentials.json from secret...
+      # - name: Debug credentials.json...
+      # - name: Check credentials.json existence...
+
       - name: Install all necessary packages
         run: pip install lxml pandas requests beautifulsoup4 html5lib gspread
+
+      # --- MODIFIED STEP ---
+      # The secret is now passed directly as an environment variable to the Python script.
       - name: Scraping today's data
+        env:
+          GOOGLE_CREDS_JSON: ${{ secrets.CREDENTIALS }}
         run: python "main.py"
+
       - name: Commit and push any changes
         run: |
           git config user.name "Automated"
