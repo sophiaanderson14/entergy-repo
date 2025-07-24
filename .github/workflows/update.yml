@@ -26,7 +26,7 @@ jobs:
             echo '{}' > data.json 
           fi   
       - name: Create credentials.json from secret
-        run: echo "%s" "${{ secrets.CREDENTIALS }}" > credentials.json
+        run: echo "${{ secrets.CREDENTIALS }}" > credentials.json
       - name: Check credentials.json existence and permissions
         run: |
           if [ -f credentials.json ]; then
