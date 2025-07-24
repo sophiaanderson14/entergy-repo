@@ -18,8 +18,14 @@ else:
 SHEET_NAME = 'Entergy'
 from google.oauth2.service_account import Credentials
 
-CREDENTIALS = "credentials.json"  # This matches your workflow step
-creds = Credentials.from_service_account_file(CREDENTIALS)
+import sys  # add this at the top if not already present
+
+CREDENTIALS = "credentials.json"
+if os.path.isfile(CREDENTIALS):
+    creds = Credentials.from_service_account_file(CREDENTIALS)
+else:
+    print(f"Credentials file '{CREDENTIALS}' not found.")
+    sys.exit(1)  # or handle as appropriate
 gc = gspread.authorize(creds)
 sheet = gc.open(SHEET_NAME).sheet1
 
