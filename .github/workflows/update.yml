@@ -25,8 +25,8 @@ jobs:
           if [ ! -f data.json ]; then 
             echo '{}' > data.json 
           fi   
-      - name: Create credentials.json from secret
-        run: echo "${{ secrets.CREDENTIALS }}" > credentials.json
+      - name: Create credentials.json from secret and convert \n to newlines
+        run: echo "${{ secrets.CREDENTIALS }}" | python -c "import sys; print(sys.stdin.read().replace('\\\\n', '\n'))" > credentials.json
       - name: Check credentials.json existence and permissions
         run: |
           if [ -f credentials.json ]; then
