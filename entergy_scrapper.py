@@ -72,7 +72,7 @@ def current_entergy(state, granularity):
     return pd.DataFrame(data)
 
 # Fetch data
-data = entergy_scrapper.current_entergy("Louisiana", "county")  # or your API call
+data = current_entergy("Louisiana", "county")  # or your API call
 
 # County renaming logic
 replace_dict = {
