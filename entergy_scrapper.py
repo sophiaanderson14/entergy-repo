@@ -49,8 +49,6 @@ except Exception as e:
 
 sheet = gc.open(SHEET_NAME).sheet1
 
-import pandas as pd
-
 def current_entergy(state, granularity):
     """
     Fetches current Entergy data for a given state and granularity (e.g., 'county' or 'zip').
