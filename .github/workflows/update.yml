@@ -27,6 +27,16 @@ jobs:
           fi   
       - name: Create credentials.json from secret
         run: printf "%s" "${{ secrets.CREDENTIALS }}" > credentials.json
+      - name: Check credentials.json existence and permissions
+        run: |
+          if [ -f credentials.json ]; then
+            echo "credentials.json exists"
+            ls -l credentials.json
+            head -n 5 credentials.json  # Only prints first 5 lines for safety
+          else
+            echo "credentials.json does not exist"
+            exit 1
+          fi
       - name: Install all necessary packages
         run: pip install lxml pandas requests beautifulsoup4 html5lib gspread
       - name: Scraping today's data
