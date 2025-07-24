@@ -1,4 +1,3 @@
-import entergy_scrapper
 import gspread
 import pandas as pd
 import os
