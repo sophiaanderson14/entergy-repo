@@ -38,7 +38,7 @@ except Exception as e:
 def current_entergy(location, area):
     url = f"https://entergy.datacapable.com/datacapable/v1/entergy/Entergy{location}/{area}"
     print(url)
-    now = datetime.now()
+    now = datetime.datetime.now()
     r = requests.get(url)
     data = r.json()
     entergy = pd.DataFrame(data)
