@@ -88,7 +88,7 @@ import datetime
 
 # Open the spreadsheet
 sh = gc.open(SHEET_NAME)
-
+base_sheet_name = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M")
 # Create a new worksheet/tab for this run
 sheet_name = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M")
 existing_sheets = [ws.title for ws in sh.worksheets()]
