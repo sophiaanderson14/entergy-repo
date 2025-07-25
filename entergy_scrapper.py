@@ -59,7 +59,7 @@ data["time pulled"] = pd.to_datetime(data["time pulled"])
 
 # Create new columns 'day' and 'time'
 data["day"] = data["time pulled"].dt.date.astype(str)
-data["time"] = data["time pulled"].dt.strftime("%H:%M")
+data["time"] = data["time pulled"].dt.strftime("%H:%M:%S")
 # County renaming logic (unchanged)
 replace_dict = {
     "E. BATON ROUGE": "EAST BATON ROUGE",
@@ -75,17 +75,6 @@ if 'county' in data.columns:
 else:
     print("Warning: 'county' column not found in DataFrame.")
     data['county'] = ""
-
-expected_columns = [
-    "county",
-    "utility",
-    "customersAffected",
-    "customersServed",
-    "percent without power",
-    "day",
-    "time"
-]
-data = data.reindex(columns=expected_columns)
 
 # Convert DataFrame to list of lists (including header)
 sheet_data = [data.columns.tolist()] + data.astype(str).values.tolist()
