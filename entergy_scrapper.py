@@ -32,7 +32,7 @@ except json.JSONDecodeError:
 except Exception as e:
     print(f"An error occurred during gspread authorization: {e}")
     sys.exit(1)
-sheet = gc.open(SHEET_NAME).sheet1
+
 
 # --- This is your web-scraping code, now integrated ---
 def current_entergy(location, area):
@@ -84,9 +84,20 @@ sheet_data = [data.columns.tolist()] + data.astype(str).values.tolist()
 # Get only the data rows (excluding header)
 data_rows = data.astype(str).values.tolist()
 
-# If the sheet is empty, add the header first
-if len(sheet.get_all_values()) == 0:
-    sheet.append_row(data.columns.tolist())
+import datetime
 
-# Append new data rows
-sheet.append_rows(data_rows)
+# Open the spreadsheet
+sh = gc.open(SHEET_NAME)
+
+# Create a new worksheet/tab for this run
+sheet_name = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M")
+worksheet = sh.add_worksheet(title=sheet_name, rows=str(len(data)+1), cols=str(len(data.columns)))
+
+# Generate a unique new worksheet name for each run
+sheet_name = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M")
+sh = gc.open(SHEET_NAME)
+worksheet = sh.add_worksheet(title=sheet_name, rows=str(len(data)+1), cols=str(len(data.columns)))
+
+# Write header and data
+worksheet.append_row(data.columns.tolist())
+worksheet.append_rows(data_rows)
