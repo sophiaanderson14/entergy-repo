@@ -1,8 +1,7 @@
 import gspread
 import pandas as pd
 import os
-
-# Authenticate and connect
+import sys
 import json
 
 filename = 'data.json'
@@ -16,12 +15,6 @@ else:
     raise FileNotFoundError(f"{filename} does not exist.")
 SHEET_NAME = 'Entergy'
 from google.oauth2.service_account import Credentials
-
-import sys  # add this at the top if not already present
-
-# --- START: MODIFIED SECTION FOR GITHUB ACTIONS ---
-# This block replaces the original file-based authentication.
-# It reads the credentials from an environment variable.
 
 # 1. Get the JSON string from the environment variable
 creds_json_string = os.environ.get('GOOGLE_CREDS_JSON')
@@ -44,8 +37,6 @@ except json.JSONDecodeError:
 except Exception as e:
     print(f"An error occurred during gspread authorization: {e}")
     sys.exit(1)
-# --- END: MODIFIED SECTION FOR GITHUB ACTIONS ---
-
 
 sheet = gc.open(SHEET_NAME).sheet1
 
@@ -72,7 +63,7 @@ def current_entergy(state, granularity):
     return pd.DataFrame(data)
 
 # Fetch data
-data = current_entergy("Louisiana", "county")  # or your API call
+data = current_entergy("Louisiana", "county")  
 
 # County renaming logic
 replace_dict = {
