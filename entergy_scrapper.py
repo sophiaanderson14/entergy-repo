@@ -91,6 +91,10 @@ sh = gc.open(SHEET_NAME)
 
 # Create a new worksheet/tab for this run
 sheet_name = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M")
+existing_sheets = [ws.title for ws in sh.worksheets()]
+if sheet_name in existing_sheets:
+    # Add seconds for uniqueness
+    sheet_name = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
 worksheet = sh.add_worksheet(title=sheet_name, rows=str(len(data)+1), cols=str(len(data.columns)))
 
 # Generate a unique new worksheet name for each run
