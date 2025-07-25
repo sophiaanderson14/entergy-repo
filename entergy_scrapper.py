@@ -53,6 +53,8 @@ def current_entergy(location, area):
 # Use the scraper to get data
 data = current_entergy("Louisiana", "county")  
 
+data["percent without power"] = (100 * data["customersAffected"] / data["customersServed"]).round(2)
+
 # County renaming logic (unchanged)
 replace_dict = {
     "E. BATON ROUGE": "EAST BATON ROUGE",
