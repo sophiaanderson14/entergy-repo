@@ -54,9 +54,12 @@ def current_entergy(location, area):
 data = current_entergy("Louisiana", "county")  
 
 data["percent without power"] = (100 * data["customersAffected"] / data["customersServed"]).round(2)
-# Ensure 'time pulled' is a datetime object
+
+# If not already done:
 data["time pulled"] = pd.to_datetime(data["time pulled"])
-data["time"] = data["time pulled"].dt.strftime("%H")
+
+# Format without seconds:
+data["time pulled"] = data["time pulled"].dt.strftime("%Y-%m-%d %H:%M")
 
 
 # County renaming logic (unchanged)
