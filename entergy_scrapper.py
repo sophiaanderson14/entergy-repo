@@ -84,8 +84,6 @@ sheet_data = [data.columns.tolist()] + data.astype(str).values.tolist()
 # Get only the data rows (excluding header)
 data_rows = data.astype(str).values.tolist()
 
-import datetime
-
 # Open the spreadsheet
 sh = gc.open(SHEET_NAME)
 base_sheet_name = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M")
