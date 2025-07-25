@@ -74,6 +74,12 @@ else:
 # Convert DataFrame to list of lists (including header)
 sheet_data = [data.columns.tolist()] + data.astype(str).values.tolist()
 
-# Clear the sheet and batch update (unchanged)
-sheet.clear()
-sheet.update('A1', sheet_data)
+# Get only the data rows (excluding header)
+data_rows = data.astype(str).values.tolist()
+
+# If the sheet is empty, add the header first
+if len(sheet.get_all_values()) == 0:
+    sheet.append_row(data.columns.tolist())
+
+# Append new data rows
+sheet.append_rows(data_rows)
