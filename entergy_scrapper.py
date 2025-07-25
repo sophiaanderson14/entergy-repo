@@ -46,21 +46,6 @@ def current_entergy(state, granularity):
     Returns a pandas DataFrame with the results.
     Replace the logic below with your actual data retrieval logic.
     """
-    # Example mock data
-    if granularity == "county":
-        data = {
-            "county": ["ACADIA", "ALLEN"],
-            "longitude": [-92.52246006, -92.68816176]
-        }
-    elif granularity == "zip":
-        data = {
-            "zip": ["70112", "70113"],
-            "value": [50, 70]
-        }
-    else:
-        data = {}
-
-    return pd.DataFrame(data)
 
 # Fetch data
 data = current_entergy("Louisiana", "county")  
