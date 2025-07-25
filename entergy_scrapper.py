@@ -92,16 +92,16 @@ sh = gc.open(SHEET_NAME)
 # Create a new worksheet/tab for this run
 sheet_name = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M")
 existing_sheets = [ws.title for ws in sh.worksheets()]
+sheet_name = base_sheet_name
+
 if sheet_name in existing_sheets:
     # Add seconds for uniqueness
     sheet_name = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+     counter = 1
+    orig_sheet_name = sheet_name
+    while sheet_name in existing_sheets:
+        sheet_name = f"{orig_sheet_name}-{counter}"
+        counter += 1
 worksheet = sh.add_worksheet(title=sheet_name, rows=str(len(data)+1), cols=str(len(data.columns)))
-
-# Generate a unique new worksheet name for each run
-sheet_name = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M")
-sh = gc.open(SHEET_NAME)
-worksheet = sh.add_worksheet(title=sheet_name, rows=str(len(data)+1), cols=str(len(data.columns)))
-
-# Write header and data
 worksheet.append_row(data.columns.tolist())
-worksheet.append_rows(data_rows)
+worksheet.append_rows(data.astype(str).values.tolist())
