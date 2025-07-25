@@ -56,10 +56,9 @@ data = current_entergy("Louisiana", "county")
 data["percent without power"] = (100 * data["customersAffected"] / data["customersServed"]).round(2)
 # Ensure 'time pulled' is a datetime object
 data["time pulled"] = pd.to_datetime(data["time pulled"])
+data["time"] = data["time pulled"].dt.strftime("%H")
 
-# Create new columns 'day' and 'time'
-data["day"] = data["time pulled"].dt.date.astype(str)
-data["time"] = data["time pulled"].dt.strftime("%H:%M:%S")
+
 # County renaming logic (unchanged)
 replace_dict = {
     "E. BATON ROUGE": "EAST BATON ROUGE",
