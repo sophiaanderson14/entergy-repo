@@ -97,7 +97,7 @@ sheet_name = base_sheet_name
 if sheet_name in existing_sheets:
     # Add seconds for uniqueness
     sheet_name = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-     counter = 1
+    counter = 1
     orig_sheet_name = sheet_name
     while sheet_name in existing_sheets:
         sheet_name = f"{orig_sheet_name}-{counter}"
