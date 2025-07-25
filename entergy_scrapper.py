@@ -59,7 +59,7 @@ data["time pulled"] = pd.to_datetime(data["time pulled"])
 
 # Create new columns 'day' and 'time'
 data["day"] = data["time pulled"].dt.date.astype(str)
-data["time"] = data["time pulled"].dt.strftime("%H:%M:%S")
+data["time"] = data["time pulled"].dt.strftime("%H:%M")
 # County renaming logic (unchanged)
 replace_dict = {
     "E. BATON ROUGE": "EAST BATON ROUGE",
