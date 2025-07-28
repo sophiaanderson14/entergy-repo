@@ -85,22 +85,13 @@ sheet_data = [data.columns.tolist()] + data.astype(str).values.tolist()
 # Get only the data rows (excluding header)
 data_rows = data.astype(str).values.tolist()
 
-# Open the spreadsheet
+# Open the spreadsheet and get the first worksheet
 sh = gc.open(SHEET_NAME)
-base_sheet_name = datetime.now().strftime("%Y-%m-%d_%H-%M")
-# Create a new worksheet/tab for this run
-sheet_name = datetime.now().strftime("%Y-%m-%d_%H-%M")
-existing_sheets = [ws.title for ws in sh.worksheets()]
-sheet_name = base_sheet_name
+worksheet = sh.get_worksheet(0)  # 0 refers to the first sheet
 
-if sheet_name in existing_sheets:
-    # Add seconds for uniqueness
-    sheet_name = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-    counter = 1
-    orig_sheet_name = sheet_name
-    while sheet_name in existing_sheets:
-        sheet_name = f"{orig_sheet_name}-{counter}"
-        counter += 1
-worksheet = sh.add_worksheet(title=sheet_name, rows=str(len(data)+1), cols=str(len(data.columns)))
-worksheet.append_row(data.columns.tolist())
+# Optionally, check if headers already exist. If not, add them.
+if worksheet.row_count == 0 or not worksheet.get_all_values():
+    worksheet.append_row(data.columns.tolist())
+
+# Append data rows (excluding header)
 worksheet.append_rows(data.astype(str).values.tolist())
