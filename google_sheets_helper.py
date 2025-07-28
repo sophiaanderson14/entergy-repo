@@ -1,10 +1,3 @@
-"""
-Google Sheets Helper Module
-
-This module provides functionality to authenticate with Google Sheets API
-and append data to a specific Google Sheet for Louisiana county Entergy outage data.
-"""
-
 import gspread
 from google.auth.exceptions import GoogleAuthError
 import pandas as pd
@@ -12,7 +5,6 @@ import os
 from typing import Optional, List, Dict, Any
 import logging
 
-# Set up logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
