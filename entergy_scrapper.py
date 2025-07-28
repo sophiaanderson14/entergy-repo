@@ -52,6 +52,7 @@ def current_entergy(location, area):
 
 # Use the scraper to get data
 data = current_entergy("Louisiana", "county")  
+data["state"] = "Louisiana"
 
 data["percent without power"] = (100 * data["customersAffected"] / data["customersServed"]).round(2)
 
