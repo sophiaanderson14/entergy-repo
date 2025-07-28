@@ -25,19 +25,11 @@ jobs:
           if [ ! -f data.json ]; then 
             echo '{}' > data.json 
           fi   
-      
-      # --- DELETED STEPS ---
-      # The following steps that create and check credentials.json are no longer needed
-      # and have been removed. They were the source of the error.
-      # - name: Create credentials.json from secret...
-      # - name: Debug credentials.json...
-      # - name: Check credentials.json existence...
+
 
       - name: Install all necessary packages
         run: pip install lxml pandas requests beautifulsoup4 html5lib gspread
 
-      # --- MODIFIED STEP ---
-      # The secret is now passed directly as an environment variable to the Python script.
       - name: Scraping today's data
         env:
           GOOGLE_CREDS_JSON: ${{ secrets.CREDENTIALS }}
