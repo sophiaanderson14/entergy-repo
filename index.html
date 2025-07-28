@@ -7,29 +7,17 @@
         .graphic {
             margin: 20px;
         }
-        #csv-table {
-            margin-top: 20px;
-            border-collapse: collapse;
-            width: 100%;
-        }
-        #csv-table th, #csv-table td {
-            border: 1px solid #ddd;
-            padding: 8px;
-        }
-        #csv-table th {
-            background-color: #f2f2f2;
-        }
     </style>
 </head>
 <body>
     <h1>Entergy Power Outages</h1>
     <h1>Outage Tracker</h1>
-        <h3>Parishes in Louisiana, colored according to impact of power outages. </h3>
-        <p>The map below auto-updates every five minutes. The data comes from Entergy, and therefore only reflects households that use Entergy for energy. Entergy is the largest energy provider in the state. </p>
+    <h3>Parishes in Louisiana, colored according to impact of power outages. </h3>
+    <p>The map below auto-updates every five minutes. The data comes from Entergy, and therefore only reflects households that use Entergy for energy. Entergy is the largest energy provider in the state. </p>
 
     <div class="graphic">
-        <iframe src="https://public.tableau.com/views/Entergycustomerswithoutpower/Sheet1?:language=en-US&publish=yes&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link" width="600" height="900"></iframe>
-        <div id="csv-table"></div>
+        <!-- CORRECTED IFRAME: Note the special 'embed' URL -->
+        <iframe src="https://public.tableau.com/views/Entergycustomerswithoutpower/Sheet1?:language=en-US&:display_count=n&:origin=viz_share_link&:embed=y" width="800" height="600" style="border:none;"></iframe>
     </div>
 
 </body>
