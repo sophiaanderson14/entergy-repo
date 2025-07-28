@@ -28,31 +28,9 @@
         <p>The map below auto-updates every five minutes. The data comes from Entergy, and therefore only reflects households that use Entergy for energy. Entergy is the largest energy provider in the state. </p>
 
     <div class="graphic">
-        <iframe src="https://datawrapper.dwcdn.net/TKL6B/6/" width="600" height="900"></iframe>
+        <iframe src="https://public.tableau.com/app/profile/sophia.anderson2861/viz/Entergycustomerswithoutpower/Sheet1?publish=yes" width="600" height="900"></iframe>
         <div id="csv-table"></div>
     </div>
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        fetch('data/louisiana/county/entergy/all_data.csv')
-            .then(response => response.text())
-            .then(data => {
-                const rows = data.trim().split('\n').map(row => row.split(','));
-                const table = document.createElement('table');
-                table.id = 'csv-table';
-                rows.forEach((row, i) => {
-                    const tr = document.createElement('tr');
-                    row.forEach(cell => {
-                        const tag = i === 0 ? 'th' : 'td';
-                        const td = document.createElement(tag);
-                        td.textContent = cell;
-                        tr.appendChild(td);
-                    });
-                    table.appendChild(tr);
-                });
-                document.getElementById('csv-table').appendChild(table);
-            })
-            .catch(error => console.error(error));
-    });
-    </script>
+  
 </body>
 </html>
