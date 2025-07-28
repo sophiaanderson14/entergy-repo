@@ -71,6 +71,7 @@ replace_dict = {
     "E. FELICIANA": "EAST FELICIANA",
     "W. FELICIANA": "WEST FELICIANA",
     "LA SALLE": "LASALLE",
+    "OTHER": "",
 }
 if 'county' in data.columns:
     data['county'] = data['county'].replace(replace_dict)
