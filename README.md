@@ -136,14 +136,6 @@ entergy-repo/
 
 **Data format changes**: If the API response format changes, you may need to update the column handling in `entergy_scrapper.py`.
 
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Test thoroughly
-5. Submit a pull request
-
 ## Notes
 
 - The `credentials.json` file is automatically excluded from git via `.gitignore`
