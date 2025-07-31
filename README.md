@@ -1,6 +1,6 @@
 # Entergy Outage Data Scraper
 
-This repository contains scripts to scrape power outage data from Entergy's API and store it in CSV files or Google Sheets.
+This repository was made to add scraped data from Entergy's power outage website to a map that can be filtered by time period. This way, users can see a snapshot of outages for any ten minute interval. This is part of a project for WWNO in New Orleans, LA in partnership with the Reynolds Journalism Institute at the University of Missouri. 
 
 ## Features
 
@@ -33,56 +33,25 @@ pip install -r requirements.txt
 
 For Louisiana county data to be automatically saved to Google Sheets instead of CSV, follow these steps:
 
-#### 1. Create a Google Cloud Project
+First, make sure the name of your Google Sheet is consistent throughout all your scripts. In order to link to a Google Sheet, you have to set up a Google Cloud authorization key. 
 
-1. Go to the [Google Cloud Console](https://console.cloud.google.com/)
-2. Create a new project or select an existing one
-3. Enable the Google Sheets API:
-   - Go to "APIs & Services" > "Library"
-   - Search for "Google Sheets API"
-   - Click on it and press "Enable"
+You can do this for free by setting up a Google Cloud account. I don’t recommend doing this from a Google account linked to your company or university because your account may have built in restrictions that limit this part of the process. You can set up a Google Cloud account from any email address. Note that if you have trouble finding any of the settings mentioned in the following steps, you can always search for them within Google Cloud. 
 
-#### 2. Create Service Account Credentials
+Go to https://console.cloud.google.com/ 
+Create a new project by clicking on IAM & Admin. You can also search for Create a Project
 
-1. Go to "APIs & Services" > "Credentials"
-2. Click "Create Credentials" > "Service Account"
-3. Fill in the service account details and click "Create"
-4. On the permissions page, you can skip adding roles (click "Continue")
-5. Click "Done"
-6. Click on the created service account
-7. Go to the "Keys" tab
-8. Click "Add Key" > "Create New Key"
-9. Choose "JSON" format and click "Create"
-10. Save the downloaded JSON file as `credentials.json` in the project root directory
+Once you’ve created and named your project, go to APIs and services and then Library. Search for Google Sheets API. Click on it and choose Enable
+Go to APIs and Services then Credentials. Choose Create Credentials and choose Service account. The only information you need to add is the name, everything else is optional. 
+Go to te Keys tab, choose Create new key and choose the JSON format. The key will download. Name it “credentials” and save it to the same folder on your computer as the rest of the files in your repository. Do not upload it to your repository. 
+Share your Google Sheet with the email in your credentials JSON (give edit access). To find the email, open the JSON in Notepad or a similar app on your computer. 
 
-#### 3. Create and Configure Google Sheet
+Now you’ll create a GitHub secret to store the information on your credentials JSON. This is more secure than uploading the JSON to your repository. 
 
-1. Create a new Google Sheet at [sheets.google.com](https://sheets.google.com)
-2. Copy the sheet URL (should look like: `https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID/edit`)
-3. Share the sheet with your service account:
-   - Click "Share" in the top right
-   - Add the service account email (found in the `credentials.json` file under `client_email`)
-   - Give it "Editor" permissions
-4. Make the sheet publicly viewable:
-   - Click "Share" > "Change to anyone with the link"
-   - Set permission to "Viewer"
-   - Copy the sharing link
+In your repository, go to Settings, Secrets and Variables, then Actions
+Under Repository secrets, choose Create a new secret  
+Copy and paste the full contents of your credentials JSON into the secret and save it
 
-#### 4. Set Environment Variable
-
-Set the Google Sheet URL as an environment variable:
-
-**Linux/Mac:**
-```bash
-export GOOGLE_SHEET_URL="https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID"
-```
-
-**Windows:**
-```cmd
-set GOOGLE_SHEET_URL=https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID
-```
-
-Or add it to your system environment variables permanently.
+Note: Sometimes copying and pasting a file like this will add extra spaces or characters that you can’t see and cause your code to fail. I solved this issue by converting the JSON into one line using this converter. I copied and pasted the converted one-line JSON into the secret.
 
 ## Usage
 
