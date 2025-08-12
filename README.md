@@ -118,27 +118,7 @@ entergy-repo/
 └── README.md               # This file
 ```
 
-## Troubleshooting
-
-### Google Sheets Issues
-
-**"Credentials file not found"**: Make sure `credentials.json` is in the project root directory and contains valid service account credentials.
-
-**"Spreadsheet not found or not accessible"**: Ensure the service account email has been given Editor access to the Google Sheet.
-
-**"GOOGLE_SHEET_URL environment variable not set"**: Set the environment variable with your Google Sheet URL.
-
-**Falls back to CSV**: If Google Sheets integration fails, the scraper will automatically fall back to saving Louisiana county data in CSV format.
-
-### API Issues
-
-**Connection errors**: The Entergy API may be temporarily unavailable. The script will show the attempted URL for debugging.
-
-**Data format changes**: If the API response format changes, you may need to update the column handling in `entergy_scrapper.py`.
-
-## Notes
 
 - The `credentials.json` file is automatically excluded from git via `.gitignore`
 - Google Sheets integration is only used for Louisiana county data
 - All other combinations (Louisiana zip, Mississippi county/zip) continue to use CSV files
-- The Google Sheet should be manually shared for public viewing after setup
